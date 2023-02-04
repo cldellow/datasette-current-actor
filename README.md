@@ -39,12 +39,12 @@ CREATE TABLE notes(
 );
 ```
 
-Or create a trigger on a table that sets the `last_edited_by` column to
+Or create an UPDATE trigger on a table that sets the `last_edited_by` column to
 `current_actor()`.
 
 #### Row-level security
 
-Restrict what rows users can see:
+Restrict the rows that users see:
 
 ```sql
 CREATE VIEW rls AS
@@ -53,7 +53,7 @@ SELECT * FROM sensitive_data WHERE owner = current_actor()
 
 You can see a live example at https://dux.fly.dev/cooking/my_questions, which should show you 0 rows.
 
-That instance permits "logging" in by passing a `_whoami` query parameter. If you visit https://dux.fly.dev/cooking/my_questions?_whoami=15, you'll see all of user 15's questions.
+That instance permits "logging in" by passing a `_whoami` query parameter. If you visit https://dux.fly.dev/cooking/my_questions?_whoami=15, you'll see all of user 15's questions.
 
 
 
