@@ -33,6 +33,6 @@ setup(
     packages=["datasette_current_actor"],
     entry_points={"datasette": ["current_actor = datasette_current_actor"]},
     install_requires=["datasette"],
-    extras_require={"test": ["pytest", "pytest-asyncio"]},
+    extras_require={"test": ["pytest", "pytest-asyncio", "pytest-watch"]},
     python_requires=">=3.7",
 )
