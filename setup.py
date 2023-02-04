@@ -32,7 +32,7 @@ setup(
     version=VERSION,
     packages=["datasette_current_actor"],
     entry_points={"datasette": ["current_actor = datasette_current_actor"]},
-    install_requires=["datasette>=1.0"],
+    install_requires=["datasette>=1.0a0"],
     extras_require={"test": ["pytest", "pytest-asyncio", "pytest-watch"]},
     python_requires=">=3.7",
 )
