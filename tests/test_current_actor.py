@@ -47,7 +47,6 @@ async def test_insert_defaults(tmp_path):
     assert response.status_code == 200
     assert response.json() == []
 
-    print(datasette.client.post)
     response = await datasette.client.post(
         "/db/logs/-/insert",
         headers={
