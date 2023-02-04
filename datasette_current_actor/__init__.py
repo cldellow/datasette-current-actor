@@ -65,10 +65,6 @@ def prepare_connection(conn):
 @hookimpl
 def actor_from_request(datasette, request):
     return None
-    _id = None
-    if 'x-me' in request.headers:
-        _id = request.headers['x-me']
-    return {'id': _id}
 
 @hookimpl(specname='actor_from_request', hookwrapper=True)
 def sniff_actor_from_request(datasette, request):
