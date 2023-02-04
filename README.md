@@ -30,7 +30,16 @@ works out.
 
 #### Auditing
 
-Create a trigger on a table that sets the `last_edited_by` column to
+Track who added a row:
+
+```sql
+CREATE TABLE notes(
+  created_by text not null default (current_actor()),
+  note text not null
+);
+```
+
+Or create a trigger on a table that sets the `last_edited_by` column to
 `current_actor()`.
 
 #### Row-level security
