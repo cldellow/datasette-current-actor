@@ -42,6 +42,12 @@ CREATE VIEW rls AS
 SELECT * FROM sensitive_data WHERE owner = current_actor()
 ```
 
+You can see a live example at https://dux.fly.dev/cooking/my_questions, which should show you 0 rows.
+
+That instance permits "logging" in by passing a `_whoami` query parameter. If you visit https://dux.fly.dev/cooking/my_questions?_whoami=15, you'll see all of user 15's questions.
+
+
+
 ## Development
 
 To set up this plugin locally, first checkout the code. Then create a new virtual environment:
