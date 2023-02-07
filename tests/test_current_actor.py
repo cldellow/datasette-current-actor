@@ -26,6 +26,19 @@ async def test_current_actor_some():
     assert response.status_code == 200
     assert response.json() == [{'actor': 'root'}]
 
+    response = await datasette.client.get("/_memory.json?sql=select+current_actor()+as+actor&_shape=array")
+    assert response.status_code == 200
+    assert response.json() == [{'actor': 'root'}]
+
+    response = await datasette.client.get("/_memory.json?sql=select+current_actor('attrs', 'name')+as+actor&_shape=array")
+    assert response.status_code == 200
+    assert response.json() == [{'actor': 'Root'}]
+
+    response = await datasette.client.get("/_memory.json?sql=select+current_actor('attrs', 'unknown')+as+actor&_shape=array")
+    assert response.status_code == 200
+    assert response.json() == [{'actor': None}]
+
+
 @pytest.mark.asyncio
 async def test_insert_defaults(tmp_path):
     db_name = tmp_path / "db.sqlite"
