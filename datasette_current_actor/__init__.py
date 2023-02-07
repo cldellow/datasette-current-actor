@@ -66,12 +66,38 @@ def prepare_connection(conn):
     except AttributeError:
         pass
 
-    def fn(*args):
+    def current_actor(*args):
         return get_actor_from_request(tls.request, args)
 
-    conn.create_function(
-        "current_actor", -1, fn
-    )
+    def current_actor_ip():
+        req = tls.request
+        if not req:
+            return None
+
+
+        xff = req.headers.get('x-forwarded-for', '')
+        first_ip = xff.split(',')[0].strip()
+
+        if first_ip:
+            return first_ip
+
+        return req.scope['client'][0]
+
+    def current_actor_user_agent():
+        req = tls.request
+        if not req:
+            return None
+
+        ua = req.headers.get('user-agent', '')
+
+        if not ua:
+            return None
+
+        return ua
+
+    conn.create_function("current_actor", -1, current_actor)
+    conn.create_function("current_actor_ip", 0, current_actor_ip)
+    conn.create_function("current_actor_user_agent", 0, current_actor_user_agent)
 
 # We always register an actor_from_request hook so that our
 # actor_from_request hookwrapper is guaranteed to fire

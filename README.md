@@ -15,14 +15,14 @@ Install this plugin in the same environment as Datasette.
 
 ## Usage
 
-### Boring mode
+- `current_actor()` returns the current actor's ID, or `NULL` if no actor.
+- `current_actor('attrs', 'name')` navigates the actor object, returning
+   the value of the `name` key stored in the `attrs` key, or `NULL` if any
+   of the intermediate values are absent.
+- `current_actor_ip()` returns the current actor's IP address
+- `current_actor_user_agent()` returns the current actor's HTTP user agent
 
-`SELECT current_actor()` returns `NULL` if there's no currently-logged in actor,
-or the id of the actor.
-
-You could put this in a canned query to provide limited access to tables.
-
-### Ludicrous mode
+### Default values, views and triggers
 
 SQLite is _flexible_. It turns out you can refer to functions that don't exist
 when issuing DDL statements. As long as they exist when they're needed, it all
@@ -35,6 +35,7 @@ Track who added a row:
 ```sql
 CREATE TABLE notes(
   created_by text not null default (current_actor()),
+  created_by_ip text not null default (current_actor_ip()),
   note text not null
 );
 ```

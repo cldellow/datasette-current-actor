@@ -38,6 +38,43 @@ async def test_current_actor_some():
     assert response.status_code == 200
     assert response.json() == [{'actor': None}]
 
+@pytest.mark.asyncio
+async def test_current_actor_ip():
+    datasette = Datasette(memory=True)
+    response = await datasette.client.get(
+        "/_memory.json?sql=select+current_actor_ip()+as+ip&_shape=array",
+        headers={
+            'X-Forwarded-For': '199.60.237.1'
+        }
+    )
+    assert response.status_code == 200
+    assert response.json() == [{'ip': '199.60.237.1'}]
+
+    response = await datasette.client.get(
+        "/_memory.json?sql=select+current_actor_ip()+as+ip&_shape=array",
+    )
+    assert response.status_code == 200
+    assert response.json() == [{'ip': '127.0.0.1'}]
+
+@pytest.mark.asyncio
+async def test_current_actor_user_agent():
+    datasette = Datasette(memory=True)
+    response = await datasette.client.get(
+        "/_memory.json?sql=select+current_actor_user_agent()+as+ua&_shape=array",
+        headers={
+            'user-agent': 'foo'
+        }
+    )
+    assert response.status_code == 200
+    assert response.json() == [{'ua': 'foo'}]
+
+    response = await datasette.client.get(
+        "/_memory.json?sql=select+current_actor_ip()+as+ip&_shape=array",
+    )
+    assert response.status_code == 200
+    assert response.json() == [{'ip': '127.0.0.1'}]
+
+
 
 @pytest.mark.asyncio
 async def test_insert_defaults(tmp_path):
