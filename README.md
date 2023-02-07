@@ -5,7 +5,7 @@
 [![Tests](https://github.com/cldellow/datasette-current-actor/workflows/Test/badge.svg)](https://github.com/cldellow/datasette-current-actor/actions?query=workflow%3ATest)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/cldellow/datasette-current-actor/blob/main/LICENSE)
 
-Adds a `current_actor()` function to SQLite that show's the current actor's ID.
+Adds functions to SQLite to show the current actor's ID, IP and user agent.
 
 ## Installation
 

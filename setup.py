@@ -14,7 +14,7 @@ def get_long_description():
 
 setup(
     name="datasette-current-actor",
-    description="Adds a current_actor() function to SQLite that show's the current actor's ID.",
+    description="Adds functions to SQLite to show the current actor's ID, IP and user agent.",
     long_description=get_long_description(),
     long_description_content_type="text/markdown",
     author="Colin Dellow",
