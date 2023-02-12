@@ -54,8 +54,8 @@ SELECT * FROM sensitive_data WHERE owner = current_actor()
 
 You can see a live example at https://dux.fly.dev/cooking/my_questions, which should show you 0 rows.
 
-That instance permits "logging in" by passing a `_whoami` query parameter. If you visit https://dux.fly.dev/cooking/my_questions?_whoami=15, you'll see all of user 15's questions.
-
+You can use the hamburger menu in the top right to log in with GitHub. You will then see questions whose owner_id ends
+in the same digit as your GitHub user ID.
 
 
 ## Development
